@@ -22,7 +22,7 @@ output_dir="${train_data_dir}/train_out"
 logging_dir="${output_dir}/log"
 
 # Output settings | 输出设置
-output_name="${person_name}_face"           # output model name | 模型保存名称
+output_name="${person_name}_${data_parent_name}"           # output model name | 模型保存名称
 save_model_as="safetensors" # model save ext | 模型保存格式 ckpt, pt, safetensors
 
 # Train related params | 训练相关参数
