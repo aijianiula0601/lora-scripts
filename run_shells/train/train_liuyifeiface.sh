@@ -6,12 +6,12 @@ cd ../../
 
 
 #--------------------------------------------------------------------
-# 训练20张刘亦菲，没有采用截取脸部操作
+# 训练20张刘亦菲，处理数据时候采用了 Auto focal point crop
 #--------------------------------------------------------------------
 
 # Train data path | 设置训练用模型、图片
 person_name="liuyifei"
-data_parent_name="noface20"
+data_parent_name="face30"
 
 pretrained_model="/mnt/cephfs/hjh/train_record/images/text2image/chilloutmix-ni/chilloutmix-Ni.safetensors" # base model path | 底模路径
 reg_data_dir=""                           # directory for regularization images | 正则化数据集路径，默认不使用正则化图像。
@@ -28,7 +28,7 @@ save_model_as="safetensors" # model save ext | 模型保存格式 ckpt, pt, safe
 # Train related params | 训练相关参数
 resolution="512,512"  # image resolution w,h. 图片分辨率，宽,高。支持非正方形，但必须是 64 倍数。
 batch_size=8          # batch size
-max_train_epoches=20  # max train epoches | 最大训练 epoch
+max_train_epoches=30  # max train epoches | 最大训练 epoch
 save_every_n_epochs=1 # save every n epochs | 每 N 个 epoch 保存一次
 
 network_dim=32   # network dim | 常用 4~128，不是越大越好
@@ -92,7 +92,7 @@ fi
 
 if [ $noise_offset ]; then extArgs+=("--noise_offset $noise_offset"); fi
 
-CUDA_VISIBLE_DEVICES=3 \
+CUDA_VISIBLE_DEVICES=2 \
 accelerate launch --num_cpu_threads_per_process=8 "./sd-scripts/train_network.py" \
   --enable_bucket \
   --pretrained_model_name_or_path=$pretrained_model \
