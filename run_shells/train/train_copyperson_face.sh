@@ -11,8 +11,8 @@ cd ../../
 
 # Train data path | 设置训练用模型、图片
 person_name="dileba"
-data_parent_name="face20"
-data_org_dir="/mnt/cephfs/hjh/train_record/images/text2image/test_imgs/dileba20_face_train"
+data_parent_name="face30"
+data_org_dir="/mnt/cephfs/hjh/train_record/images/text2image/test_imgs/dileba30_face_train"
 
 
 pretrained_model="/mnt/cephfs/hjh/train_record/images/text2image/chilloutmix-ni/chilloutmix-Ni.safetensors" # base model path | 底模路径

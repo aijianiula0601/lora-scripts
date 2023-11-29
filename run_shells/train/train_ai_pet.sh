@@ -10,18 +10,18 @@ cd ../../
 #--------------------------------------------------------------------
 
 # Train data path | 设置训练用模型、图片
-person_name="dileba"
-data_parent_name="noface30"
-data_org_dir="/mnt/cephfs/hjh/train_record/images/text2image/test_imgs/dileba30_train"
+person_name="a_cut_cartoon_raddit"
+data_parent_name="a_cut_cartoon_raddit"
+data_org_dir="/mnt/cephfs/hjh/train_record/images/dataset/ai_raddit_processed"
 
 
 pretrained_model="/mnt/cephfs/hjh/train_record/images/text2image/chilloutmix-ni/chilloutmix-Ni.safetensors" # base model path | 底模路径
 reg_data_dir=""                           # directory for regularization images | 正则化数据集路径，默认不使用正则化图像。
-train_base_dir="/mnt/cephfs/hjh/train_record/images/text2image/lora-scripts/${person_name}"
+train_base_dir="/mnt/cephfs/hjh/train_record/images/text2image/lora-scripts/ai_pets/${person_name}"
 
 train_data_dir="${train_base_dir}/${data_parent_name}"              # train dataset path | 训练数据集路径, 这么目录下面有一个目录，名为 5_liuyifei
 mkdir -p ${train_data_dir}
-ln -s ${data_org_dir} ${train_data_dir}/5_${person_name}||true
+ln -s ${data_org_dir} ${train_data_dir}/${person_name}||true
 
 output_dir="${train_data_dir}/train_out"
 logging_dir="${output_dir}/log"
@@ -97,7 +97,7 @@ fi
 
 if [ $noise_offset ]; then extArgs+=("--noise_offset $noise_offset"); fi
 
-CUDA_VISIBLE_DEVICES=4 \
+CUDA_VISIBLE_DEVICES=1 \
 accelerate launch --num_cpu_threads_per_process=8 "./sd-scripts/train_network.py" \
   --enable_bucket \
   --pretrained_model_name_or_path=$pretrained_model \
