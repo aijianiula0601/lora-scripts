@@ -19,7 +19,9 @@ pretrained_model="/mnt/cephfs/hjh/train_record/images/text2image/chilloutmix-ni/
 reg_data_dir=""                           # directory for regularization images | 正则化数据集路径，默认不使用正则化图像。
 train_base_dir="/mnt/cephfs/hjh/train_record/images/text2image/lora-scripts/ai_pets/${person_name}"
 
-train_data_dir="${train_base_dir}/${data_parent_name}"              # train dataset path | 训练数据集路径, 这么目录下面有一个目录，名为 5_liuyifei
+
+#train_data_dir下面必须建个目录 5_{person_name}，里面放着训练数据
+train_data_dir="${train_base_dir}/${data_parent_name}"              # train dataset path | 训练数据集路径, 这么目录下面有一个目录，名为 5_a_cut_cartoon_raddit
 mkdir -p ${train_data_dir}
 ln -s ${data_org_dir} ${train_data_dir}/${person_name}||true
 
@@ -32,7 +34,7 @@ save_model_as="safetensors" # model save ext | 模型保存格式 ckpt, pt, safe
 
 # Train related params | 训练相关参数
 resolution="512,512"  # image resolution w,h. 图片分辨率，宽,高。支持非正方形，但必须是 64 倍数。
-batch_size=8          # batch size
+batch_size=4          # batch size
 max_train_epoches=30  # max train epoches | 最大训练 epoch
 save_every_n_epochs=1 # save every n epochs | 每 N 个 epoch 保存一次
 
